@@ -11,9 +11,13 @@ texto = st.text_area(
 
 if st.button("Procesar"):
 
-    resultados = []
-
     lineas = texto.splitlines()
+
+    st.write("Número de líneas:", len(lineas))
+
+    for i, linea in enumerate(lineas):
+
+        st.write(i, repr(linea))
 
     for linea in lineas:
 
