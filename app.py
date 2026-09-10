@@ -25,10 +25,13 @@ if st.button("Procesar"):
         modelo = partes[0].strip()
         url = partes[1].strip()
 
-        datos.append({
-            "MODELO": modelo,
-            "URL": url
-        })
+datos.append({
+    "MODELO": modelo,
+    "URL": url,
+    "POSICION": "",
+    "SELLER": "",
+    "CARREFOUR": ""
+})
 
     df = pd.DataFrame(datos)
 
