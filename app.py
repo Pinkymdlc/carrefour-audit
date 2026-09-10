@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import re
 
 st.title("Auditor Carrefour")
 
@@ -11,19 +10,19 @@ texto = st.text_area(
 
 if st.button("Procesar"):
 
-    lineas = texto.splitlines()
+    lineas = [x.strip() for x in texto.splitlines() if x.strip()]
 
     datos = []
 
     for linea in lineas:
 
-        partes = linea.split(" ", 1)
+        partes = linea.split()
 
         if len(partes) < 2:
             continue
 
-        modelo = partes[0].strip()
-        url = partes[1].strip()
+        modelo = partes[0]
+        url = partes[1]
 
         datos.append({
             "MODELO": modelo,
@@ -33,6 +32,8 @@ if st.button("Procesar"):
             "CARREFOUR": ""
         })
 
-    df = pd.DataFrame(datos)
-
-    st.dataframe(df)
+    if datos:
+        df = pd.DataFrame(datos)
+        st.dataframe(df)
+    else:
+        st.error("No se encontraron registros")
