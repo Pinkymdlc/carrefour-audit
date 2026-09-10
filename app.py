@@ -15,20 +15,14 @@ if st.button("Procesar"):
 
     st.write("Número de líneas:", len(lineas))
 
-    for i, linea in enumerate(lineas):
-
-        st.write(i, repr(linea))
+    datos = []
 
     for linea in lineas:
 
-        st.write(linea)
-
-        if "http" not in linea:
-            continue
-
-        resultados.append({
+        datos.append({
             "LINEA": linea
         })
 
-    if len(resultados) > 0:
-        st.dataframe(pd.DataFrame(resultados))
+    df = pd.DataFrame(datos)
+
+    st.dataframe(df)
