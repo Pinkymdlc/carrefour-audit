@@ -13,14 +13,21 @@ if st.button("Procesar"):
 
     lineas = texto.splitlines()
 
-    st.write("Número de líneas:", len(lineas))
-
     datos = []
 
     for linea in lineas:
 
+        partes = linea.split(" ", 1)
+
+        if len(partes) < 2:
+            continue
+
+        modelo = partes[0].strip()
+        url = partes[1].strip()
+
         datos.append({
-            "LINEA": linea
+            "MODELO": modelo,
+            "URL": url
         })
 
     df = pd.DataFrame(datos)
