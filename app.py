@@ -9,7 +9,6 @@ type=["xlsx"]
 )
  
 if archivo:
- 
 df = pd.read_excel(archivo)
  
 st.write("Datos cargados")
@@ -17,7 +16,6 @@ st.write("Datos cargados")
 st.dataframe(df)
  
 if st.button("Procesar"):
- 
 df["POSICION"] = ""
 df["SELLER"] = ""
 df["CARREFOUR"] = ""
