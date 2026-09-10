@@ -71,4 +71,31 @@ if st.button("Procesar"):
         datos.append({
             "MODELO": modelo,
             "URL": url,
-           
+            "POSICION": posicion,
+            "SELLER": seller,
+            "CARREFOUR": carrefour
+        })
+
+    if len(datos) > 0:
+
+        df = pd.DataFrame(datos)
+
+        st.dataframe(df)
+
+        csv = df.to_csv(
+            index=False
+        ).encode("utf-8")
+
+        st.download_button(
+            "Descargar CSV",
+            csv,
+            "resultado.csv",
+            "text/csv"
+        )
+
+    else:
+
+        st.error(
+            "No se encontraron registros"
+        )
+``
