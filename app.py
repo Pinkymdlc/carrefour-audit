@@ -17,52 +17,14 @@ if st.button("Procesar"):
 
     for linea in lineas:
 
+        st.write(linea)
+
         if "http" not in linea:
             continue
 
-        modelo = re.search(
-            r"([A-Z0-9]+(?:\.[A-Z0-9]+)?)",
-            linea
-        )
+        resultados.append({
+            "LINEA": linea
+        })
 
-        url = re.search(
-            r"https?://[^\s]+",
-            linea
-        )
-
-        if modelo and url:
-
-            resultados.append({
-                "MODELO": modelo.group(1),
-                "URL": url.group(0),
-                "POSICION": "Pendiente",
-                "SELLER": "Pendiente",
-                "CARREFOUR": "Pendiente"
-            })
-
-    if len(resultados) == 0:
-
-        st.error(
-            "No se han encontrado modelos y URLs."
-        )
-
-    else:
-
-        df = pd.DataFrame(resultados)
-
-        st.success(
-            f"{len(df)} referencias encontradas"
-        )
-
-        st.dataframe(df)
-
-        csv = df.to_csv(
-            index=False
-        ).encode("utf-8")
-
-        st.download_button(
-            "Descargar CSV",
-            csv,
-            "resultado.csv",
-            "text/csv"
-        )
+    if len(resultados) > 0:
+        st.dataframe(pd.DataFrame(resultados))
