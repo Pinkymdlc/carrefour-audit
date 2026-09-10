@@ -98,4 +98,3 @@ if st.button("Procesar"):
         st.error(
             "No se encontraron registros"
         )
-``
