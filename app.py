@@ -1,22 +1,30 @@
 import streamlit as st
 import pandas as pd
+from io import StringIO
 
 st.title("Auditor Carrefour")
 
-archivo = st.file_uploader(
-    "Sube el Excel",
-    type=["xlsx"]
+st.write(
+    "Copia las columnas desde Excel y pégalas aquí."
 )
 
-if archivo:
-    df = pd.read_excel(archivo)
+datos = st.text_area(
+    "Pegar tabla",
+    height=300
+)
 
-    st.write("Datos cargados")
-    st.dataframe(df)
+if st.button("Cargar datos"):
 
-    if st.button("Procesar"):
-        df["POSICION"] = ""
-        df["SELLER"] = ""
-        df["CARREFOUR"] = ""
+    if datos:
+
+        df = pd.read_csv(
+            StringIO(datos),
+            sep="\t"
+        )
+
+        st.success("Datos cargados")
 
         st.dataframe(df)
+
+    else:
+        st.warning("Pega primero una tabla")
